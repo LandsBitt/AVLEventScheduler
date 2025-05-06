@@ -1,113 +1,125 @@
-AVLEventScheduler 🌳🕒
-AVLEventScheduler é um projeto em Java desenvolvido para gerenciar eventos utilizando uma árvore AVL, garantindo desempenho eficiente e organização sem conflitos de horários. Com uma estrutura de dados autobalanceada, o sistema mantém os eventos organizados e acessíveis de forma otimizada, ideal para aplicações que exigem agendamento preciso.
+# AVLEventScheduler 🌳🕒
 
-Funcionalidades
-🌿 Estrutura AVL
-Utiliza uma árvore AVL para armazenar os eventos, garantindo que a estrutura permaneça balanceada com diferença de altura máxima de 1 entre subárvores. Isso assegura desempenho eficiente nas operações de inserção, remoção e busca.
+**AVLEventScheduler** is a Java implementation of a self-balancing AVL tree designed for managing events with conflict-free time scheduling. The project organizes events by their unique IDs, ensures no time overlaps, and supports efficient insertion, deletion, and querying operations.
 
-📅 Gerenciamento de Eventos
-Cada evento contém:
+---
 
-ID único
+## Features
 
-Horário de início
+- **Self-Balancing AVL Tree**: Maintains a height difference of at most 1 between subtrees for optimal performance.  
+- **Event Management**: Stores events with unique IDs, start times, end times, and descriptions.  
+- **Time Conflict Detection**: Prevents insertion of events with overlapping time slots.  
+- **Query Operations**:  
+  - List all events sorted by ID (in-order traversal).  
+  - Retrieve events starting at a specific time.  
+  - Retrieve events within a specified time range.  
+- **Event Removal**: Delete events by start time.  
+- **Command-line Interface**: Simple interaction via terminal.
 
-Horário de término
+---
 
-Descrição (ex: “Aula de Computação”, “Reunião”, etc.)
+## Prerequisites
 
-❌ Evita Conflitos de Horário
-Antes de inserir um novo evento, o sistema verifica se há sobreposição de horários, evitando agendamentos duplicados ou conflitantes.
+- Java Development Kit (JDK) 8 or higher  
+- A Java IDE (e.g., IntelliJ IDEA, Eclipse) or terminal for compilation and execution
 
-Consultas Disponíveis
-Impressão ordenada: Exibe todos os eventos ordenados por ID, utilizando percurso in-order.
+---
 
-Consulta por horário específico: Retorna os eventos que iniciam em um horário determinado.
+## Installation
 
-Consulta por intervalo de tempo: Lista os eventos dentro de um intervalo de tempo informado.
+1. **Clone the repository**  
+```bash
+git clone https://github.com/LandsBitt/AVLEventScheduler.git
+```
 
-Remoção de evento: Remove um evento com base em seu horário de início.
-
-Requisitos
-Java JDK 8 ou superior.
-
-IDE como IntelliJ, Eclipse, ou o terminal para execução via linha de comando.
-
-Como Executar
-Clone o repositório:
-
-bash
-Copiar
-Editar
-git clone https://github.com/your-username/AVLEventScheduler.git
-Acesse o diretório do projeto:
-
-bash
-Copiar
-Editar
+2. **Navigate to the project directory**  
+```bash
 cd AVLEventScheduler
-Compile os arquivos Java:
+```
 
-bash
-Copiar
-Editar
+3. **Compile the Java source files**  
+```bash
 javac -d . src/org/example/*.java
-Execute a classe principal:
+```
 
-bash
-Copiar
-Editar
+4. **Run the main class**  
+```bash
 java org.example.Main
-Comandos Suportados
-Digite comandos diretamente no terminal:
+```
 
-ADD <event_id> <start_time> <end_time> <description>: Adiciona um novo evento.
+---
 
-QUERY_TIME <start_time>: Consulta eventos que iniciam no horário especificado.
+## Usage
 
-QUERY_RANGE <start_time> <end_time>: Consulta eventos dentro de um intervalo de tempo.
+The program processes commands from standard input to manage events.
 
-PRINT_INORDER: Lista todos os eventos em ordem de ID.
+### Supported Commands
 
-REMOVE <start_time>: Remove o evento com o horário de início indicado.
+- `ADD <event_id> <start_time> <end_time> <description>`  
+  Inserts a new event with the specified details.
 
-Exemplo de Uso
-Entrada:
+- `QUERY_TIME <start_time>`  
+  Lists events that start at the given time.
 
-sql
-Copiar
-Editar
+- `QUERY_RANGE <start_time> <end_time>`  
+  Lists events within the specified time range.
+
+- `PRINT_INORDER`  
+  Displays all events sorted by ID.
+
+- `REMOVE <start_time>`  
+  Removes an event by its start time.
+
+---
+
+## Example
+
+**Input**
+```
 3
-ADD 1 10 12 Sessão_de_Código
-ADD 2 13 15 Descanso
+ADD 1 10 12 Meeting
+ADD 2 13 15 Presentation
 PRINT_INORDER
-Saída:
+```
 
-yaml
-Copiar
-Editar
+**Output**
+```
 Evento com ID 1 inserido com sucesso.
 Evento com ID 2 inserido com sucesso.
-ID: 1, descrição: Sessão_de_Código, Início: 10, Fim: 12  
-ID: 2, descrição: Descanso, Início: 13, Fim: 15
-Estrutura do Projeto
-bash
-Copiar
-Editar
+ID: 1, descrição: Meeting, Inicio:10, Fim:12
+ID: 2, descrição: Presentation, Inicio:13, Fim:15
+```
+
+---
+
+## Project Structure
+
+```
 AVLEventScheduler/
 ├── src/
 │   └── org/
 │       └── example/
-│           ├── Btree.java       # Gerencia a árvore AVL
-│           ├── Bnode.java       # Nó da árvore com lógica de balanceamento
-│           ├── Evento.java      # Classe de dados do evento
-│           └── Main.java        # Interface de linha de comando
-├── README.md                    # Este arquivo
-Sobre o Código
-Evento.java: Classe de modelo com atributos do evento, construtores, getters e setters.
+│           ├── Btree.java      # AVL tree implementation
+│           ├── Bnode.java      # AVL node with balancing and event operations
+│           ├── Evento.java     # Event class for storing event details
+│           └── Main.java       # Command-line interface for user input
+├── README.md
+```
 
-Bnode.java: Implementa os nós da árvore AVL com lógica de balanceamento, inserção, remoção e busca.
+---
 
-Btree.java: Controla a árvore como um todo e delega operações para os nós.
+## Code Overview
 
-Main.java: Interface de usuário por terminal, interpretando os comandos recebidos.
+- **Evento.java**  
+  Defines the `Evento` class with fields for event ID, start time, end time, and description, including getters, setters, and a copy constructor.
+
+- **Bnode.java**  
+  Implements AVL tree nodes with balancing logic (rotations, height management) and methods for event insertion, deletion, and querying.
+
+- **Btree.java**  
+  Manages the AVL tree, delegating operations to the root node.
+
+- **Main.java**  
+  Handles command-line input and executes user commands.
+
+---
